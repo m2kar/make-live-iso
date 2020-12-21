@@ -7,12 +7,19 @@ ENV DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical
 
 # =====================================================
 # 进行一些修改，例如 安装谷歌浏览器
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+# RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+# RUN apt-get update
+# RUN apt-get install -y google-chrome-stable
 RUN apt-get update
-RUN apt-get install -y google-chrome-stable
-
+RUN apt-get install -y curl openssh-server
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && sh ./get-docker.sh
+RUN curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+RUN apt-get install -y vim
+# RUN yes | sudo  snap install code --classic
 # ======================================================
+
+
 # 安装重新包装ISO所需的软件包（我们将使用此映像重新包装自身）
 # 安装BIOS支持：grub-pc-bin
 # 安装EFI支持：grub-egi-amd64-bin and grub-efi-amd64-signed 

@@ -1,2 +1,4 @@
 **/*.squashfs
 **/*.iso
+iso/
+./newfilesystem.tar
